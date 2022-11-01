@@ -12,6 +12,22 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
+      estudante_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Pessoas',
+          key: 'id',
+        },
+      },
+      turma_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Turmas',
+          key: 'id',
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
