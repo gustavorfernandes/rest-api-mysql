@@ -84,9 +84,9 @@ class PessoaController {
   }
 
   static async criaMatricula(req, res) {
-    const { estudanteId } = req.params
-    const novaMatricula = { ...req.body, estudante_id: Number(estudanteId) }
-        try {
+    const { estudanteId } = req.params;
+    const novaMatricula = { ...req.body, estudante_id: Number(estudanteId) };
+    try {
       const novaMatriculaCriada = await database.Matriculas.create(novaMatricula);
       return res.status(200).json(novaMatriculaCriada);
     } catch (error) {
@@ -123,7 +123,19 @@ class PessoaController {
           id: Number(matriculaId),
         },
       });
-      return res.status(200).json({ mensagem: `registro com id ${matriculaId} deletado com sucesso` });
+      return res
+        .status(200)
+        .json({ mensagem: `registro com id ${matriculaId} deletado com sucesso` });
+    } catch (error) {
+      return res.status(500).json({ erro: error.message });
+    }
+  }
+
+  static async restauraPessoa(req, res) {
+    const { id } = req.params;
+    try {
+      await database.Pessoas.restore({ where: { id: Number(id) } });
+      return res.status(200).json( { mensagem: `id ${id} restaurado com sucesso`})
     } catch (error) {
       return res.status(500).json({ erro: error.message });
     }

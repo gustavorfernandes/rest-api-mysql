@@ -12,6 +12,7 @@ router
   .get('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.pegaUmaMatricula)
   .post('/pessoas/:estudanteId/matricula', PessoaController.criaMatricula)
   .put('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.atualizaMatricula)
-  .delete('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.deletaMatricula);
+  .delete('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.deletaMatricula)
+  .post('/pessoas/:id/restaura', PessoaController.restauraPessoa);
 
 module.exports = router;
