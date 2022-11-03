@@ -1,9 +1,18 @@
 const database = require('../models');
 
 class PessoaController {
+  static async pegaPessoasAtivas(_, res) {
+    try {
+      const pessoasAtivas = await database.Pessoas.findAll();
+      return res.status(200).json(pessoasAtivas);
+    } catch (error) {
+      return res.status(500).json({ erro: error.message });
+    }
+  }
+
   static async pegaTodasAsPessoas(_, res) {
     try {
-      const todasAsPessoas = await database.Pessoas.findAll();
+      const todasAsPessoas = await database.Pessoas.scope('todos').findAll();
       return res.status(200).json(todasAsPessoas);
     } catch (error) {
       return res.status(500).json({ erro: error.message });
