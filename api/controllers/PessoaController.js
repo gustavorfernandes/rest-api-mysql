@@ -144,7 +144,22 @@ class PessoaController {
     const { id } = req.params;
     try {
       await database.Pessoas.restore({ where: { id: Number(id) } });
-      return res.status(200).json( { mensagem: `id ${id} restaurado com sucesso`})
+      return res.status(200).json({ mensagem: `id ${id} restaurado com sucesso` });
+    } catch (error) {
+      return res.status(500).json({ erro: error.message });
+    }
+  }
+
+  static async pegaMatriculas(req, res) {
+    const { estudanteId } = req.params;
+    try {
+      const pessoa = await database.Pessoas.findOne({
+        where: {
+          id: Number(estudanteId),
+        },
+      });
+      const matriculas = await pessoa.getAulasMatriculadas();
+      return res.status(200).json(matriculas);
     } catch (error) {
       return res.status(500).json({ erro: error.message });
     }
