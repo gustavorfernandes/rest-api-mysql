@@ -183,7 +183,7 @@ class PessoaController {
     }
   }
 
-  static async pegaTurmasLotadas(req, res) {
+  static async pegaTurmasLotadas(_, res) {
     const lotacaoTurma = 2;
     try {
       const turmasLotadas = await database.Matriculas.findAndCountAll({
@@ -195,6 +195,23 @@ class PessoaController {
         having: Sequelize.literal(`count(turma_id) >= ${lotacaoTurma}`),
       });
       return res.status(200).json(turmasLotadas.count);
+    } catch (error) {
+      return res.status(500).json({ erro: error.message });
+    }
+  }
+
+  static async cancelaPessoa(req, res) {
+    const { estudanteId } = req.params;
+    try {
+      await database.Pessoas.update(
+        { ativo: false }, 
+        { where: { id: Number(estudanteId) } }
+      );
+      await database.Matriculas.update(
+        { status: 'cancelado' },
+        { where: { estudante_id: Number(estudanteId) } }
+      );
+      return res.status(200).json( { message: `matrículas referentes ao estudante ${estudanteId} canceladas`});
     } catch (error) {
       return res.status(500).json({ erro: error.message });
     }
