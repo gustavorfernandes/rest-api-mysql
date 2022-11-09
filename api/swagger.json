@@ -1,0 +1,280 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API Rest com MySQL",
+    "description": "Esta API tem como objetivo a integração e manipulação de dados SQL com o tema de escola de inglês.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/pessoas": {
+      "get": {
+        "summary": "Listar pessoas",
+        "description": "Esta rota é responsável por listar todas as pessoas cadastradas no banco de dados.",
+        "tags": ["Pessoas"],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pessoa"                       
+                  } 
+                }
+              }
+            }
+          }          
+        }
+      },
+      "post": {
+        "summary": "Cadastrar pessoa",
+        "description": "Esta rota é responsável por cadastrar uma pessoa.",
+        "tags": ["Pessoas"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pessoa"
+              },
+              "examples": {
+                "aluno": {
+                  "value": {
+                    "nome": "John Doe",
+                    "ativo": true,
+                    "email": "j@j.com",
+                    "role": "aluno"
+                  }
+                }
+              }              
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Pessoa"                       
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pessoas/ativas": {
+      "get": {
+        "summary": "Listar pessoas ativas",
+        "description": "Esta rota é responsável por listar todas as pessoas ativas cadastradas no banco de dados.",
+        "tags": ["Pessoas"],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pessoa"                       
+                  } 
+                }
+              }
+            }
+          }          
+        }
+      }
+    },
+    "/pessoas/{id}": {
+      "get": {
+        "summary": "Buscar uma pessoa pelo id",
+        "description": "Esta rota é responsável por buscar uma pessoa pelo id.",
+        "tags": ["Pessoas"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Nome da pessoa pelo ID.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Pessoa"                       
+                }
+              }
+            }
+          }          
+        }
+      },
+      "put": {
+        "summary": "Alterar uma pessoa pelo id",
+        "description": "Esta rota é responsável por alterar uma pessoa através do id.",
+        "tags": ["Pessoas"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Nome da pessoa pelo ID.",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pessoa"
+              },
+              "examples": {
+                "aluno": {
+                  "value": {
+                    "nome": "John Doe",
+                    "ativo": true,
+                    "email": "john@john.com",
+                    "role": "aluno"
+                  }
+                }
+              }              
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "id {id} atualizado."            
+          }          
+        }
+      },
+      "delete": {
+        "summary": "Apagar uma pessoa pelo id",
+        "description": "Esta rota é responsável por apagar uma pessoa pelo id.",
+        "tags": ["Pessoas"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Nome da pessoa pelo ID.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "id {id} deletado."            
+          }          
+        }
+      }
+    },
+    "/pessoas/{id}/restaura": {
+      "post": {
+        "summary": "Restaurar pessoa",
+        "description": "Esta rota é responsável por restaurar uma pessoa que foi apagada do sistema.",
+        "tags": ["Pessoas"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Nome da pessoa pelo ID.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Pessoa"                       
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pessoas/{estudanteId}/cancela": {
+      "post": {
+        "summary": "Cancelar matricula de um aluno pelo id de estudante",
+        "description": "Esta rota é responsável por cancelar a matrícula de um aluno pelo seu id de estudante.",
+        "tags": ["Pessoas"],
+        "parameters": [
+          {
+            "name": "estudanteId",
+            "in": "path",
+            "description": "Id de estudante do aluno.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "matrículas ref. estudante {estudanteId} canceladas."            
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {      
+      "Pessoa": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },          
+          "nome": {
+            "type": "string"
+          },
+          "ativo": {
+            "type": "boolean"
+          },
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "deletedAt": {
+            "type": null,
+            "nullable": true
+          }
+        }
+      }
+    }
+  }
+}
