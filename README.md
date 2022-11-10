@@ -4,7 +4,7 @@ Rest API application made with Sequelize and MySQL.
 
 ## Starting
 
-Endpoints: 
+Base URL: 
 
 ```bash
 ...

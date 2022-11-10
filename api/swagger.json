@@ -98,7 +98,7 @@
     },
     "/pessoas/{id}": {
       "get": {
-        "summary": "Buscar uma pessoa pelo id",
+        "summary": "Buscar pessoa pelo id",
         "description": "Esta rota é responsável por buscar uma pessoa pelo id.",
         "tags": ["Pessoas"],
         "parameters": [
@@ -127,7 +127,7 @@
         }
       },
       "put": {
-        "summary": "Alterar uma pessoa pelo id",
+        "summary": "Alterar pessoa",
         "description": "Esta rota é responsável por alterar uma pessoa através do id.",
         "tags": ["Pessoas"],
         "parameters": [
@@ -167,7 +167,7 @@
         }
       },
       "delete": {
-        "summary": "Apagar uma pessoa pelo id",
+        "summary": "Apagar pessoa",
         "description": "Esta rota é responsável por apagar uma pessoa pelo id.",
         "tags": ["Pessoas"],
         "parameters": [
@@ -241,7 +241,614 @@
           }
         }
       }
-    }
+    },
+    "/niveis": {
+      "get": {
+        "summary": "Listar níveis",
+        "description": "Esta rota é responsável por listar todas os níveis no banco de dados.",
+        "tags": ["Níveis"],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Nivel"                       
+                  } 
+                }
+              }
+            }
+          }          
+        }
+      },
+      "post": {
+        "summary": "Cadastrar nível",
+        "description": "Esta rota é responsável por cadastrar um nível.",
+        "tags": ["Níveis"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Nivel"
+              },
+              "examples": {
+                "nivel": {
+                  "value": {
+                    "descr_nivel": "expert"
+                  }
+                }
+              }              
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Nivel"                       
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/niveis/{id}": {
+      "get": {
+        "summary": "Buscar nível pelo id",
+        "description": "Esta rota é responsável por buscar um nível pelo id.",
+        "tags": ["Níveis"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do nível.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Nivel"                       
+                }
+              }
+            }
+          }          
+        }
+      },
+      "put": {
+        "summary": "Alterar nível",
+        "description": "Esta rota é responsável por alterar um nível através do id.",
+        "tags": ["Níveis"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do nível.",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Nivel"
+              },
+              "examples": {
+                "nível": {
+                  "value": {
+                    "descr_nivel": "avançado"
+                  }
+                }
+              }              
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "id {id} atualizado."            
+          }          
+        }
+      },
+      "delete": {
+        "summary": "Apagar nível",
+        "description": "Esta rota é responsável por apagar um nível pelo id.",
+        "tags": ["Níveis"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do nível.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "id {id} deletado."            
+          }          
+        }
+      }
+    },
+    "/niveis/{id}/restaura": {
+      "post": {
+        "summary": "Restaurar nível",
+        "description": "Esta rota é responsável por restaurar um nível que foi apagado do sistema.",
+        "tags": ["Níveis"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do nível.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Nivel"                       
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/turmas": {
+      "get": {
+        "summary": "Listar turmas",
+        "description": "Esta rota é responsável por listar todas as turmas no banco de dados.",
+        "tags": ["Turmas"],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Turma"                       
+                  } 
+                }
+              }
+            }
+          }          
+        }
+      },
+      "post": {
+        "summary": "Cadastrar turma",
+        "description": "Esta rota é responsável por cadastrar uma turma.",
+        "tags": ["Turmas"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Turma"
+              },
+              "examples": {
+                "turma": {
+                  "value": {
+                    "data_inicio": "2023-01-01",
+                    "nivel_id": 1,
+                    "docente_id": 2
+                  }
+                }
+              }              
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Turma"                       
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/turmas/{id}": {
+      "get": {
+        "summary": "Buscar turma pelo id",
+        "description": "Esta rota é responsável por buscar uma turma pelo id.",
+        "tags": ["Turmas"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da turma.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Turma"                       
+                }
+              }
+            }
+          }          
+        }
+      },
+      "put": {
+        "summary": "Alterar turma",
+        "description": "Esta rota é responsável por alterar uma turma através do id.",
+        "tags": ["Turmas"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da turma.",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Turma"
+              },
+              "examples": {
+                "nível": {
+                  "value": {
+                    "data_inicio": "2023-01-01",
+                    "nivel_id": 1,
+                    "docente_id": 2
+                  }
+                }
+              }              
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "id {id} atualizado."            
+          }          
+        }
+      },
+      "delete": {
+        "summary": "Apagar turma",
+        "description": "Esta rota é responsável por apagar uma turma pelo id.",
+        "tags": ["Turmas"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da turma.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "id {id} deletado."            
+          }          
+        }
+      }
+    },
+    "/turmas/{id}/restaura": {
+      "post": {
+        "summary": "Restaurar turma",
+        "description": "Esta rota é responsável por restaurar uma turma que foi apagada do sistema.",
+        "tags": ["Turmas"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id da turma.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Turma"                       
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pessoas/matricula/lotada": {
+      "get": {
+        "summary": "Listar turmas lotadas",
+        "description": "Esta rota é responsável por listar todas as turmas que possuem lotação.",
+        "tags": ["Turmas"],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "example": [ 
+                    {
+                    "turma_id": 2,
+                    "count": 1
+                    }
+                  ]
+                }
+              }
+            }
+          }          
+        }
+      }
+    },
+    "/pessoas/matricula/{turmaId}/confirmadas": {
+      "get": {
+        "summary": "Listar matrículas pelo id da turma",
+        "description": "Esta rota é responsável por listar todas as matrículas que possuem o status confirmado através do seu id de turma.",
+        "tags": ["Matrículas"],
+        "parameters": [
+          {
+            "name": "turmaId",
+            "in": "path",
+            "description": "Id da turma.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Matricula"                       
+                }
+              }
+            }
+          }          
+        }
+      }
+    },
+    "/pessoas/{estudanteId}/matricula": {      
+      "post": {
+        "summary": "Criar matrícula",
+        "description": "Esta rota é responsável por criar uma matrícula através do id de estudante.",
+        "tags": ["Matrículas"],
+        "parameters": [
+          {
+            "name": "estudanteId",
+            "in": "path",
+            "description": "Id do estudante.",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Matricula"
+              },
+              "examples": {
+                "matrícula": {
+                  "value": {
+                    "status": "confirmado",
+                    "turma_id": 1
+                  }
+                }
+              }              
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Matricula"                       
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pessoas/{estudanteId}/matricula/{matriculaId}": {
+      "get": {
+        "summary": "Buscar matrícula pelo id de estudante e id de matrícula",
+        "description": "Esta rota é responsável por buscar uma matrícula através do seu id e do id do estudante correspondente.",
+        "tags": ["Matrículas"],
+        "parameters": [
+          {
+            "name": "estudanteId",
+            "in": "path",
+            "description": "Id do estudante.",
+            "required": true
+          },
+          {
+            "name": "matriculaId",
+            "in": "path",
+            "description": "Id da matrícula.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Matricula"                       
+                }
+              }
+            }
+          }          
+        }
+      },
+      "put": {
+        "summary": "Alterar matrícula",
+        "description": "Esta rota é responsável por alterar uma matrícula.",
+        "tags": ["Matrículas"],
+        "parameters": [
+          {
+            "name": "estudanteId",
+            "in": "path",
+            "description": "Id do estudante.",
+            "required": true
+          },
+          {
+            "name": "matriculaId",
+            "in": "path",
+            "description": "Id da matrícula.",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Matricula"
+              },
+              "examples": {
+                "matrícula": {
+                  "value": {
+                    "status": "cancelado"
+                  }
+                }
+              }              
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "id {matriculaId} atualizado."            
+          }          
+        }
+      },
+      "delete": {
+        "summary": "Apagar matrícula",
+        "description": "Esta rota é responsável por apagar uma matrícula.",
+        "tags": ["Matrículas"],
+        "parameters": [
+          {
+            "name": "matriculaId",
+            "in": "path",
+            "description": "Id da matrícula.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "id {matriculaId} deletado."            
+          }          
+        }
+      }
+    },
+    "/pessoas/:estudanteId/matricula/:matriculaId/restaura": {
+      "post": {
+        "summary": "Restaurar matrícula",
+        "description": "Esta rota é responsável por restaurar uma matrícula que foi apagada do sistema.",
+        "tags": ["Matrículas"],
+        "parameters": [
+          {
+            "name": "matriculaId",
+            "in": "path",
+            "description": "Id da matrícula.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "500": {
+            "description": "Mensagem de erro."
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Matricula"                       
+                }
+              }
+            }
+          }
+        }
+      }
+    } 
   },
   "components": {
     "schemas": {      
@@ -262,6 +869,81 @@
           },
           "role": {
             "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "deletedAt": {
+            "type": null,
+            "nullable": true
+          }
+        }
+      },
+      "Nivel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },          
+          "descr_nivel": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "deletedAt": {
+            "type": null,
+            "nullable": true
+          }
+        }
+      },
+      "Turma": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },          
+          "data_inicio": {
+            "type": "string"
+          },          
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "deletedAt": {
+            "type": null,
+            "nullable": true
+          },
+          "nivel_id": {
+            "type": "number"
+          },
+          "docente_id": {
+            "type": "number"
+          }
+        }
+      },
+      "Matricula": {
+        "type": "object",
+        "properties": {        
+          "id": {
+           "type": "number"
+          },
+          "status": {
+            "type": "string"
+          },
+          "estudante_id": {
+           "type": "number"
+          },
+          "turma_id": {
+            "type": "number"
           },
           "createdAt": {
             "type": "string"

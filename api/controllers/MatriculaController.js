@@ -75,7 +75,7 @@ class MatriculaController {
   }
 
   static async pegaTurmasLotadas(req, res) {
-    const lotacaoTurma = 2;
+    const lotacaoTurma = 0;
     try {
       const turmasLotadas = await matriculasServices.encontraEContaRegistros(
         { status: 'confirmado' },
